@@ -33,7 +33,7 @@ end
 
 # line the prisoners up
 prisoners_array = []
-(0..9999).each {|i| prisoners_array[i] = Prisoner.new}
+(0..99).each {|i| prisoners_array[i] = Prisoner.new}
 
 #the start of the array is the back of the line, so each prisoner can see the hats of those prisoners ahead of him.
 # assign visible red hats to each prisoner
