@@ -15,7 +15,7 @@ class Prisoner
 # all prisoners can hear the responses given behind them and use that, along with the number of red hats in front of them
 # to figure out if the total number of red hats accounted for is odd or even.
   def call_own_hat_colour(first_response, other_responses)
-    self.total_reds_known_about = (other_responses.select{|response| response == 'red'}.count) + self.visible_red_hats
+    self.total_reds_known_about = (other_responses.count{|response| response == 'red'}) + self.visible_red_hats
 
     case first_response
     when 'red'
@@ -33,7 +33,7 @@ end
 
 # line the prisoners up
 prisoners_array = []
-(0..99).each {|i| prisoners_array[i] = Prisoner.new}
+(0..9999).each {|i| prisoners_array[i] = Prisoner.new}
 
 #the start of the array is the back of the line, so each prisoner can see the hats of those prisoners ahead of him.
 # assign visible red hats to each prisoner
@@ -57,9 +57,9 @@ remaining_prisoners.each do |prisoner|
   prisoner.call_own_hat_colour(prisoners_array[0].shout_out, array_of_responses)
 end
 
-total_reds = prisoners_array.select{|prisoner| prisoner.hat_colour == 'red'}.count
-total_blues = prisoners_array.select{|prisoner| prisoner.hat_colour == 'blue'}.count
-survivors = prisoners_array.select{|prisoner| prisoner.alive_or_dead == 'alive'}.count
+total_reds = prisoners_array.count{|prisoner| prisoner.hat_colour == 'red'}
+total_blues = prisoners_array.count{|prisoner| prisoner.hat_colour == 'blue'}
+survivors = prisoners_array.count{|prisoner| prisoner.alive_or_dead == 'alive'}
 
 puts "Total number of prisoners: #{prisoners_array.count}"
 puts "FYI: #{total_reds} prisoners have red hats and #{total_blues} have blue hats"
